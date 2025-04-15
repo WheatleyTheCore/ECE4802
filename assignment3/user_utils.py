@@ -42,10 +42,13 @@ def extended_euclidean(a, b):
     return (d, x, y)
         
 def modInv(a, m):
+    try:
     # can just use pow(a, -1, m) but just here for completeness of answer
-    d, x, y = extended_euclidean(a, m)
-    assert d == 1, 'a and m aren\'t coprime! :(('
-    return x % m
+        d, x, y = extended_euclidean(a, m)
+        assert d == 1, 'a and m aren\'t coprime! :(('
+        return x % m
+    except:
+        return None
 
 def bits_to_int(bit_array):
     out = 0
@@ -75,6 +78,6 @@ def squareAndMult(a, e, m):
     table.add_row(['m^2^i mod n', reduce(lambda x,y: x + f'*{y}', squares[1:], str(squares[0]))]) # mod n introduced here so the numbers don't get too huge
     value = reduce(lambda x, y: (x * y) % m, squares, 1) # mod m every time to also keep numbers small
     table.add_row(['result', value])
-    print(table)
+    # print(table)
     return value
 
